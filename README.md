@@ -180,7 +180,3 @@ To add new tools:
 3. Register the tool in the category's `__init__.py`
 
 ---
-
-## License
-
-MIT License
