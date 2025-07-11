@@ -9,7 +9,7 @@ A comprehensive modular CLI tool for file management, conversion, compression, m
 ### From source
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Studio-Todos/mtool
 cd mtool
 pip install -e .
 ```
