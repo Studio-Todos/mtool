@@ -14,6 +14,7 @@ Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: click>=8.0.0
 Requires-Dist: Pillow>=9.0.0
 Requires-Dist: qrcode[pil]>=7.4.2
@@ -27,6 +28,7 @@ Dynamic: author
 Dynamic: classifier
 Dynamic: description
 Dynamic: description-content-type
+Dynamic: license-file
 Dynamic: provides-extra
 Dynamic: requires-dist
 Dynamic: requires-python
@@ -34,14 +36,16 @@ Dynamic: summary
 
 # mtool
 
-A modular CLI tool for various file operations including file conversion, compression, and more.
+A comprehensive modular CLI tool for file management, conversion, compression, media processing, web utilities, text processing, games, and more.
+
+---
 
 ## Installation
 
 ### From source
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Studio-Todos/mtool
 cd mtool
 pip install -e .
 ```
@@ -52,290 +56,167 @@ pip install -e .
 pip install mtool
 ```
 
+---
+
 ## Usage
 
 The basic command structure is:
 
 ```bash
-mtool <category> <toolname> [options]
+mtool <category> <tool> [subtool] [options]
 ```
 
-### File Operations
+---
 
-#### File Compression
+## Categories & Tools
 
-```bash
-# Compress files/directories
-mtool file compress input.txt output.zip
+### File Management (`file`)
 
-# Extract compressed files
-mtool file extract input.zip output_directory
-```
+- **Compression/Extraction**
 
-### Convert Operations
+  - `compress <input> <output>`: Compress files/directories (zip, tar, gzip, bzip2, xz)
+  - `extract <input> <output_dir>`: Extract compressed files/archives
 
-#### File Conversion
+- **Management & Search**
+  - `manage find-large <dir> --top N`: Find largest files
+  - `manage find-duplicates <dir>`: Find duplicate files by content
+  - `manage organize <dir> --by extension`: Organize files by extension
+  - `manage rename-batch <pattern> <replacement> [dir]`: Batch rename files
+  - `manage search <pattern> [dir]`: Find files by name (wildcards)
+  - `manage search-content <text> [dir]`: Search file contents for text
+  - `manage recent [dir] --days N`: Show recently modified files
 
-```bash
-# Convert image formats
-mtool convert file image input.jpg output.png
+---
 
-# Convert audio formats
-mtool convert file audio input.mp3 output.wav
+### PDF Tools (`pdf`)
 
-# Convert video formats
-mtool convert file video input.mp4 output.avi
-```
+- `info show <file>`: Show PDF details (pages, size, metadata)
+- `split pages <input> <output> <range>`: Extract specific pages
+- `split all <input> <output_dir>`: Split into individual pages
+- `merge files <file1> <file2> ... <output>`: Merge multiple PDFs
+- `merge directory <dir> <output> --sort`: Merge all PDFs in a directory
+- `compress basic <input> <output> --quality Q`: Compress PDF file
 
-### PDF Operations
+---
 
-#### PDF Information
+### Image Tools (`image`)
 
-```bash
-# Show PDF details (pages, size, metadata)
-mtool pdf info show document.pdf
-```
+- **Processing**
 
-#### PDF Split/Merge
+  - `resize <file> --size WxH [--output out]`: Resize images
+  - `watermark <file> --text TEXT [--output out]`: Add text watermark
+  - `optimize <file> [--output out] [--quality Q]`: Optimize/compress images
+  - `info <file>`: Show image metadata
 
-```bash
-# Extract specific pages
-mtool pdf split pages input.pdf output.pdf "1-3,5,7-10"
+- **Compression**
+  - `compress by-percent <file> <percent> [--output out]`: Reduce file size by percent
+  - `compress to-size <file> <size_kb> [--output out]`: Compress to target size (KB)
 
-# Split into individual pages
-mtool pdf split all input.pdf output_directory
+---
 
-# Merge multiple PDFs
-mtool pdf merge files file1.pdf file2.pdf output.pdf
+### Video Tools (`video`)
 
-# Merge all PDFs in a directory
-mtool pdf merge directory input_dir output.pdf --sort
-```
+- **Compression**
+  - `compress by-percent <file> <percent> [--output out]`: Reduce file size by percent
+  - `compress to-size <file> <size_mb> [--output out]`: Compress to target size (MB)
 
-#### PDF Conversion
+---
 
-```bash
-# Convert images to PDF
-mtool convert pdf images-to-pdf image1.jpg image2.png output.pdf
+### Conversion Tools (`convert`)
 
-# Convert PDF to images
-mtool convert pdf pdf-to-images input.pdf output_dir --format png --dpi 200
+- **File Conversion**
 
-# Extract text from PDF
-mtool convert pdf extract-text input.pdf output.txt
-```
+  - `file image <input> <output>`: Convert image formats (JPG, PNG, etc.)
+  - `file audio <input> <output>`: Convert audio formats (MP3, WAV, etc.)
+  - `file video <input> <output>`: Convert video formats (MP4, AVI, etc.)
 
-#### PDF Compression
+- **PDF Conversion**
 
-```bash
-# Compress PDF file
-mtool pdf compress basic input.pdf output.pdf --quality 0.8
-```
+  - `pdf images-to-pdf <img1> <img2> ... <output>`: Images to PDF
+  - `pdf pdf-to-images <input> <output_dir> [--format F --dpi D]`: PDF to images
+  - `pdf extract-text <input> <output>`: Extract text from PDF
 
-### Web Operations
+- **Data Conversion**
+  - `data csv-to-json <input> <output> [--pretty --array]`
+  - `data json-to-csv <input> <output> [--flatten]`
+  - `data format-json <input> <output> [--indent N --sort-keys]`
+  - `data validate-json <input>`
+  - `data csv-info <input>`
+  - `data merge-csv <file1> <file2> ... <output>`
 
-#### URL Tools
+---
 
-```bash
-# Get URL information
-mtool web url info https://example.com
+### Text Processing (`text`)
 
-# Validate URL format and accessibility
-mtool web url validate https://example.com
+- `process count <file>`: Count lines, words, characters, bytes
+- `process search <pattern> <file> [--case-sensitive --regex --line-numbers]`
+- `process replace <old> <new> <file> [--regex --backup --dry-run]`
+- `process sort <file> [--reverse --numeric]`
+- `process dedupe <file> [--case-insensitive --count]`
+- `process stats <file> [--top N]`: Text statistics and word frequency
 
-# Shorten a URL
-mtool web url shorten https://example.com --service tinyurl
+---
 
-# Expand a shortened URL
-mtool web url expand https://tinyurl.com/abc123
+### Web Tools (`web`)
 
-# URL encode/decode text
-mtool web url encode "Hello World!"
-mtool web url decode "Hello%20World%21"
-```
+- **URL Tools**
 
-#### Status Checking
+  - `url info <url>`: Get URL info
+  - `url validate <url>`: Validate URL
+  - `url shorten <url> [--service S]`: Shorten URL
+  - `url expand <short_url>`: Expand shortened URL
+  - `url encode|decode <text>`: URL encode/decode
 
-```bash
-# Check if website is online
-mtool web status check example.com
+- **Status Checking**
 
-# Check if port is open
-mtool web status port example.com 80
+  - `status check <url>`
+  - `status port <host> <port>`
+  - `status ping <host>`
+  - `status monitor <url> [--interval N --count N]`
+  - `status ssl <url>`
 
-# Ping a host
-mtool web status ping example.com
+- **Downloads**
+  - `download file <url> [--progress]`
+  - `download batch <url1> <url2> ... <dir>`
+  - `download image <url> [--output dir]`
+  - `download check <url>`
+  - `download resume <url> <output>`
 
-# Monitor website status over time
-mtool web status monitor example.com --interval 30 --count 10
+---
 
-# Check SSL certificate
-mtool web status ssl https://example.com
-```
+### Utility Tools (`util`)
 
-#### Downloads
+- **QR Codes**
 
-```bash
-# Download a file
-mtool web download file https://example.com/file.zip
+  - `qrcode generate <text>`: Generate/display QR code, optionally save as PNG
 
-# Download with progress
-mtool web download file https://example.com/file.zip --progress
+- **Calculator & Encodings**
+  - `calc evaluate <expr>`: Simple calculator (math, trig, log, etc.)
+  - `convert unit "<value> <from> to <to>"`: Unit converter (length, weight, temp, etc.)
+  - `encode base64|hex|binary|url <encode|decode> <text>`: Encode/decode data
+  - `encode church <number> [--show-lambda]`: Church encoding (lambda calculus)
 
-# Download multiple files
-mtool web download batch url1 url2 url3 output_dir
+---
 
-# Download image with validation
-mtool web download image https://example.com/image.jpg
+### Games (`tetris`)
 
-# Check if file can be downloaded
-mtool web download check https://example.com/file.zip
+- **Tetris**
+  - `play`: Play a classic command line Tetris game
+    - Use arrow keys to move and rotate pieces
+    - Space to drop pieces instantly
+    - P to pause, Q to quit
+    - Features scoring, levels, and line clearing
 
-# Resume interrupted download
-mtool web download resume https://example.com/file.zip output.zip
-```
-
-### Text Processing
-
-#### Text Analysis
-
-```bash
-# Count lines, words, characters, bytes
-mtool text process count file.txt
-
-# Show text statistics and word frequency
-mtool text process stats file.txt --top 10
-```
-
-#### Text Search and Replace
-
-```bash
-# Search for text patterns
-mtool text process search "pattern" file.txt --case-sensitive --line-numbers
-
-# Search with regex
-mtool text process search "regex.*pattern" file.txt --regex
-
-# Find and replace text
-mtool text process replace "old" "new" file.txt --backup --dry-run
-
-# Replace with regex
-mtool text process replace "old.*" "new" file.txt --regex
-```
-
-#### Text Manipulation
-
-```bash
-# Sort lines alphabetically
-mtool text process sort file.txt --reverse --numeric
-
-# Remove duplicate lines
-mtool text process dedupe file.txt --case-insensitive --count
-```
-
-### Data Conversion
-
-#### CSV Operations
-
-```bash
-# Show CSV file information
-mtool convert data csv-info data.csv
-
-# Convert CSV to JSON
-mtool convert data csv-to-json data.csv output.json --pretty --array
-
-# Convert JSON to CSV
-mtool convert data json-to-csv data.json output.csv --flatten
-
-# Merge multiple CSV files
-mtool convert data merge-csv file1.csv file2.csv output.csv
-```
-
-#### JSON Operations
-
-```bash
-# Format JSON with proper indentation
-mtool convert data format-json input.json output.json --indent 4 --sort-keys
-
-# Validate JSON format
-mtool convert data validate-json data.json
-```
-
-## Available Tools
-
-### File Category
-
-- **compress**: Compress files and directories
-- **extract**: Extract compressed archives
-
-### PDF Category
-
-- **info**: Get information about PDF files (pages, size, metadata)
-- **split**: Split PDFs by pages or extract specific pages
-- **merge**: Combine multiple PDFs into one
-- **compress**: Reduce PDF file size
-
-### Utility Category
-
-- **qrcode**: Generate QR codes from text or URLs
-
-### Web Category
-
-- **url**: URL manipulation and information tools
-  - info: Get detailed URL information
-  - validate: Check URL format and accessibility
-  - shorten: Shorten URLs using services
-  - expand: Expand shortened URLs
-  - encode/decode: URL encode/decode text
-- **status**: Website and service status checking
-  - check: Check if website is online
-  - port: Check if port is open
-  - ping: Ping a host
-  - monitor: Monitor website status over time
-  - ssl: Check SSL certificate information
-- **download**: Web download utilities
-  - file: Download files with progress tracking
-  - batch: Download multiple files
-  - image: Download images with validation
-  - check: Check download availability
-  - resume: Resume interrupted downloads
-
-### Text Category
-
-- **process**: Text processing and manipulation
-  - count: Count lines, words, characters, bytes
-  - search: Search for text patterns with regex support
-  - replace: Find and replace text with backup options
-  - sort: Sort lines alphabetically or numerically
-  - dedupe: Remove duplicate lines
-  - stats: Show text statistics and word frequency
-
-### Convert Category
-
-- **file**: Convert files between different formats
-  - image: JPG, PNG, GIF, BMP, TIFF, WebP
-  - audio: MP3, WAV, FLAC, OGG, AAC
-  - video: MP4, AVI, MOV, MKV, WebM
-- **pdf**: Convert between PDF and other formats
-  - images-to-pdf: Combine images into PDF
-  - pdf-to-images: Convert PDF pages to images
-  - extract-text: Extract text from PDF
-- **data**: Data format conversion
-  - csv-to-json: Convert CSV to JSON format
-  - json-to-csv: Convert JSON to CSV format
-  - format-json: Format JSON with indentation
-  - validate-json: Validate JSON format
-  - csv-info: Show CSV file information
-  - merge-csv: Merge multiple CSV files
+---
 
 ## Architecture
 
-mtool is designed to be highly modular and expandable:
-
 - **Core CLI**: Handles command parsing and routing
-- **Tool Categories**: Grouped by functionality (file, network, etc.)
+- **Tool Categories**: Grouped by functionality (file, image, video, pdf, web, text, util, convert, tetris)
 - **Tool Modules**: Individual tools within each category
 - **Plugin System**: Easy to add new tools and categories
+
+---
 
 ## Development
 
@@ -345,6 +226,4 @@ To add new tools:
 2. Implement the tool interface
 3. Register the tool in the category's `__init__.py`
 
-## License
-
-MIT License
+---

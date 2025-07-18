@@ -1,6 +1,6 @@
 # mtool
 
-A comprehensive modular CLI tool for file management, conversion, compression, media processing, web utilities, text processing, and more.
+A comprehensive modular CLI tool for file management, conversion, compression, media processing, web utilities, text processing, games, and more.
 
 ---
 
@@ -162,10 +162,21 @@ mtool <category> <tool> [subtool] [options]
 
 ---
 
+### Games (`tetris`)
+
+- **Tetris**
+  - `play`: Play a classic command line Tetris game
+    - Use arrow keys to move and rotate pieces
+    - Space to drop pieces instantly
+    - P to pause, Q to quit
+    - Features scoring, levels, and line clearing
+
+---
+
 ## Architecture
 
 - **Core CLI**: Handles command parsing and routing
-- **Tool Categories**: Grouped by functionality (file, image, video, pdf, web, text, util, convert)
+- **Tool Categories**: Grouped by functionality (file, image, video, pdf, web, text, util, convert, tetris)
 - **Tool Modules**: Individual tools within each category
 - **Plugin System**: Easy to add new tools and categories
 

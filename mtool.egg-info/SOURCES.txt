@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 mtool/__init__.py
@@ -24,6 +25,8 @@ mtool/pdf/compress.py
 mtool/pdf/info.py
 mtool/pdf/merge.py
 mtool/pdf/split.py
+mtool/tetris/__init__.py
+mtool/tetris/game.py
 mtool/text/__init__.py
 mtool/text/process.py
 mtool/util/__init__.py
