@@ -17,6 +17,7 @@ from mtool.convert import convert_group
 from mtool.image.process import image_group
 from mtool.video import video_group
 from mtool.tetris import tetris_group
+from mtool.ln import ln_group
 
 
 @click.group()
@@ -42,6 +43,7 @@ main.add_command(convert_group)
 main.add_command(image_group)
 main.add_command(video_group)
 main.add_command(tetris_group)
+main.add_command(ln_group)
 
 
 if __name__ == "__main__":
