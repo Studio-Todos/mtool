@@ -3,6 +3,7 @@ from rich.console import Console
 from rich.panel import Panel
 from openai import OpenAI
 import os
+import pyperclip
 
 def spice_up_text(text):
     """
@@ -18,7 +19,7 @@ def spice_up_text(text):
             "HTTP-Referer": "https://github.com/search?q=repo%3AInfiniThink-Dev%2Fmtool",
             "X-Title": "mtool",
         },
-        model="mistralai/mistral-7b-instruct",
+        model="qwen/qwen3-235b-a22b-2507:free",
         messages=[
             {
                 "role": "system",
@@ -44,12 +45,14 @@ def main():
 
     if args.summary:
         spiced_text = spice_up_text(args.summary)
-        console.print(Panel(spiced_text, title="Polished LinkedIn Post", border_style="green"))
+        pyperclip.copy(spiced_text)
+        console.print(Panel(spiced_text, title="Polished LinkedIn Post (Copied to Clipboard!)", border_style="green"))
     else:
         console.print("Paste your summary:")
         summary = input("> ")
         spiced_text = spice_up_text(summary)
-        console.print(Panel(spiced_text, title="Polished LinkedIn Post", border_style="green"))
+        pyperclip.copy(spiced_text)
+        console.print(Panel(spiced_text, title="Polished LinkedIn Post (Copied to Clipboard!)", border_style="green"))
 
 if __name__ == "__main__":
     main()

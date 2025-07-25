@@ -20,6 +20,8 @@ mtool/file/manage.py
 mtool/image/__init__.py
 mtool/image/compress.py
 mtool/image/process.py
+mtool/ln/__init__.py
+mtool/ln/post.py
 mtool/pdf/__init__.py
 mtool/pdf/compress.py
 mtool/pdf/info.py
@@ -38,3 +40,4 @@ mtool/web/__init__.py
 mtool/web/download.py
 mtool/web/status.py
 mtool/web/url.py
+tests/test_ln.py

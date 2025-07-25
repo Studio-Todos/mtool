@@ -28,6 +28,9 @@ setup(
         "Pillow>=9.0.0",
         "qrcode[pil]>=7.4.2",
         "requests>=2.25.0",
+        "rich>=13.0.0",
+        "openai>=1.0.0",
+        "pyperclip>=1.8.0",
     ],
     extras_require={
         "audio": ["pydub>=0.25.0"],

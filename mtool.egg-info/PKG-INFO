@@ -19,6 +19,9 @@ Requires-Dist: click>=8.0.0
 Requires-Dist: Pillow>=9.0.0
 Requires-Dist: qrcode[pil]>=7.4.2
 Requires-Dist: requests>=2.25.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: pyperclip>=1.8.0
 Provides-Extra: audio
 Requires-Dist: pydub>=0.25.0; extra == "audio"
 Provides-Extra: pdf

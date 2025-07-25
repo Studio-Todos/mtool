@@ -9,3 +9,6 @@
 /mtool/web/__pycache__
 /mtool/text/__pycache__
 /mtool/tetris
+/.claude
+/mtool/ln/__pycache__
+/tests/__pycache__

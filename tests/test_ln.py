@@ -24,7 +24,7 @@ class TestSpiceUpText(unittest.TestCase):
                 "HTTP-Referer": "https://github.com/search?q=repo%3AInfiniThink-Dev%2Fmtool",
                 "X-Title": "mtool",
             },
-            model="mistralai/mistral-7b-instruct",
+            model="qwen/qwen3-235b-a22b-2507:free",
             messages=[
                 {
                     "role": "system",
